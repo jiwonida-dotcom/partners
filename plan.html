@@ -135,14 +135,71 @@ li{margin-bottom:5px}
 
 <h2>To-Be 진입 아키텍처</h2>
 <div class="card">
-<div class="arch">
-<div class="node"><div class="lay">EXTERNAL</div><div class="nm">제휴 채널 — 모요</div><div class="ds">이벤트 상세 페이지에 단말+요금제 조합 노출, 정책 코드를 쿼리스트링에 포함해 아웃바운드</div></div>
-<div class="conn">│ GET · promoNo 파라미터<br>▼</div>
-<div class="node acc"><div class="lay">FRONT · 신규</div><div class="nm">정책 확인 페이지 <span class="mono">/onsale/partnerPromo</span></div><div class="ds">파라미터 검증 · 재고/요금제 상태 조회 · 예외 폴백 분기 · read-only 렌더 · 검증 결과 세션 적재</div></div>
-<div class="conn">│ GET · 세션 승계 (파라미터 없음)<br>▼</div>
-<div class="node"><div class="lay">FRONT · 기존</div><div class="nm">가입신청서 <span class="mono">/onsale/joinHowtoOpen</span></div><div class="ds">세션에서 구매정보 복원 후 개통 유형 선택. 화면 규격 변경 없음</div></div>
+<svg viewBox="0 0 860 440" width="100%" role="img" aria-label="제휴 채널에서 정책 확인 페이지를 거쳐 가입신청서로 이어지는 아키텍처 다이어그램" style="display:block">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="30" y="50" width="210" height="76" rx="10" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1"/>
+  <text x="46" y="72" font-size="11" font-weight="700" fill="#534AB7">EXTERNAL</text>
+  <text x="46" y="94" font-size="14" font-weight="700" fill="#26215C">제휴 채널 · 모요</text>
+  <text x="46" y="113" font-size="12" fill="#534AB7">이벤트 상세 · 상품 구성 링크</text>
+
+  <rect x="330" y="50" width="250" height="76" rx="10" fill="#FFFFFF" stroke="#5B4CDB" stroke-width="2"/>
+  <text x="348" y="72" font-size="11" font-weight="700" fill="#5B4CDB">FRONT · 신규</text>
+  <text x="348" y="94" font-size="14" font-weight="700" fill="#1F1D2B">정책 확인 페이지</text>
+  <text x="348" y="113" font-size="11.5" fill="#6B6880" font-family="ui-monospace,Consolas,monospace">/onsale/partnerPromo</text>
+
+  <rect x="630" y="50" width="200" height="76" rx="10" fill="#FFFFFF" stroke="#E4E2EF" stroke-width="1"/>
+  <text x="648" y="72" font-size="11" font-weight="700" fill="#8E8BA0">FRONT · 기존</text>
+  <text x="648" y="94" font-size="14" font-weight="700" fill="#1F1D2B">가입신청서</text>
+  <text x="648" y="113" font-size="11.5" fill="#6B6880" font-family="ui-monospace,Consolas,monospace">/onsale/joinHowtoOpen</text>
+
+  <line x1="240" y1="88" x2="322" y2="88" stroke="#5B4CDB" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="281" y="80" font-size="11" fill="#534AB7" text-anchor="middle">① GET</text>
+  <text x="281" y="107" font-size="10.5" fill="#8E8BA0" text-anchor="middle" font-family="ui-monospace,Consolas,monospace">?promoNo=</text>
+
+  <line x1="580" y1="88" x2="622" y2="88" stroke="#5B4CDB" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="601" y="80" font-size="11" fill="#534AB7" text-anchor="middle">②</text>
+
+  <rect x="330" y="200" width="250" height="76" rx="10" fill="#FFFFFF" stroke="#E4E2EF" stroke-width="1"/>
+  <text x="348" y="222" font-size="11" font-weight="700" fill="#8E8BA0">API · 신규</text>
+  <text x="348" y="244" font-size="14" font-weight="700" fill="#1F1D2B">정책 / 상품 서비스</text>
+  <text x="348" y="263" font-size="12" fill="#6B6880">정책 조회 · 재고 · 요금제 상태</text>
+
+  <rect x="330" y="330" width="250" height="76" rx="10" fill="#FFFFFF" stroke="#E4E2EF" stroke-width="1"/>
+  <text x="348" y="352" font-size="11" font-weight="700" fill="#8E8BA0">BACK · 신규</text>
+  <text x="348" y="374" font-size="14" font-weight="700" fill="#1F1D2B">CMS 제휴 상품 관리</text>
+  <text x="348" y="393" font-size="12" fill="#6B6880">정책 리스트 · 등록 · 수정 (PC 웹)</text>
+
+  <rect x="30" y="200" width="210" height="76" rx="10" fill="#FAECE7" stroke="#D85A30" stroke-width="1"/>
+  <text x="46" y="222" font-size="11" font-weight="700" fill="#993C1D">FALLBACK</text>
+  <text x="46" y="244" font-size="14" font-weight="700" fill="#4A1B0C">단말 목록 / 상세</text>
+  <text x="46" y="263" font-size="12" fill="#993C1D">예외 EX-01 ~ EX-04</text>
+
+  <line x1="455" y1="126" x2="455" y2="192" stroke="#5B4CDB" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="466" y="163" font-size="11" fill="#534AB7">검증 조회</text>
+
+  <path d="M380 126 L380 163 L135 163 L135 192" fill="none" stroke="#D85A30" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="258" y="156" font-size="11" fill="#993C1D" text-anchor="middle">검증 실패</text>
+
+  <path d="M730 126 L730 163 L530 163 L530 192" fill="none" stroke="#B4B2A9" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="640" y="156" font-size="11" fill="#8E8BA0" text-anchor="middle">재확인</text>
+
+  <line x1="455" y1="330" x2="455" y2="284" stroke="#B4B2A9" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="466" y="311" font-size="11" fill="#8E8BA0">정책 CRUD</text>
+
+  <rect x="630" y="200" width="200" height="120" rx="10" fill="#F5F4FA" stroke="#E4E2EF" stroke-width="1"/>
+  <text x="648" y="224" font-size="11" font-weight="700" fill="#8E8BA0">② 세션 승계</text>
+  <text x="648" y="248" font-size="12" fill="#1F1D2B">검증 결과를 서버 세션에</text>
+  <text x="648" y="266" font-size="12" fill="#1F1D2B">적재 후 GET 이동</text>
+  <text x="648" y="292" font-size="11.5" fill="#6B6880">URL 파라미터 미전송</text>
+  <text x="648" y="310" font-size="11.5" fill="#6B6880">기존 화면 수정 없음</text>
+</svg>
 </div>
-</div>
+
 <div class="note n"><span class="nt">검증 게이트 위치</span>검증과 예외 처리는 <b>정책 확인 페이지 진입 시점에 전량 선행</b>됩니다. 예외 발생 시 가입신청서에 도달하지 않으므로, 유효하지 않은 구성이 퍼널 하류로 유입되지 않습니다.</div>
 
 <h2>개발 대상 범위</h2>
