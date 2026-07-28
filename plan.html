@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제휴 채널 다이렉트 연동 · 기획 산출물</title>
+<style>
+:root{color-scheme:light;--pp:#5B4CDB;--pp-d:#3C3489;--pp-l:#F3F1FE;--bd:#E4E2EF;--tx:#1F1D2B;--tx2:#6B6880;--tx3:#8E8BA0;--ok:#0F6E56;--ok-l:#E7F5F0;--wn:#8A5A00;--wn-l:#FFF6E5;--dg:#B3261E;--dg-l:#FDECEA;--code:#F3F2F8;--surface-1:#F5F4FA}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:#FAFAFC;color:var(--tx);line-height:1.68;font-size:14.5px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 80px}
+header{background:#fff;border-bottom:1px solid var(--bd);padding:30px 0 0;margin-bottom:26px}
+.hd{max-width:1120px;margin:0 auto;padding:0 20px}
+.eyebrow{font-size:12.5px;color:var(--pp);font-weight:700;letter-spacing:.4px}
+h1{font-size:26px;font-weight:700;margin:8px 0 8px;letter-spacing:-.4px}
+.sub{color:var(--tx2);font-size:14.5px;margin-bottom:18px;max-width:820px}
+.meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px}
+.chip{background:var(--pp-l);color:var(--pp-d);font-size:12px;padding:5px 11px;border-radius:6px;font-weight:600}
+.chip.g{background:var(--ok-l);color:var(--ok)}
+.chip.w{background:var(--wn-l);color:var(--wn)}
+.chip.n{background:#F1F0F5;color:var(--tx2)}
+nav{display:flex;gap:2px;border-top:1px solid var(--bd);overflow-x:auto}
+nav button{background:none;border:none;padding:13px 16px;font-size:14px;font-weight:600;color:var(--tx2);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;font-family:inherit}
+nav button.on{color:var(--pp);border-bottom-color:var(--pp)}
+section{display:none}
+section.on{display:block}
+h2{font-size:19px;font-weight:700;margin:36px 0 12px;padding-left:11px;border-left:4px solid var(--pp)}
+h2:first-child{margin-top:6px}
+h3{font-size:15.5px;font-weight:700;margin:24px 0 9px}
+h4{font-size:14px;font-weight:700;margin:18px 0 8px;color:var(--tx2)}
+p{margin-bottom:11px}
+.lead{color:var(--tx2);margin-bottom:14px;max-width:860px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:20px;margin-bottom:14px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.kv{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F0EFF5;font-size:14px}
+.kv:last-child{border:none}
+.kv .k{color:var(--tx2);min-width:150px;flex-shrink:0;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+th{background:#F5F4FA;text-align:left;padding:10px 12px;font-weight:700;font-size:12.5px;color:var(--tx2);border-bottom:1px solid var(--bd);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid #F2F1F7;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tw{overflow-x:auto;margin-bottom:14px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:5px;white-space:nowrap}
+.b-new{background:var(--pp-l);color:var(--pp-d)}
+.b-old{background:#EFEFF3;color:#5A5866}
+.b-ok{background:var(--ok-l);color:var(--ok)}
+.b-wn{background:var(--wn-l);color:var(--wn)}
+.b-dg{background:var(--dg-l);color:var(--dg)}
+.note{background:var(--pp-l);border-radius:10px;padding:14px 16px;font-size:13.5px;margin-bottom:14px}
+.note.w{background:var(--wn-l)}
+.note.n{background:#F5F4FA}
+.note .nt{font-weight:700;display:block;margin-bottom:4px;font-size:13px}
+.mono{font-family:ui-monospace,'SFMono-Regular',Consolas,monospace;font-size:12.5px;background:var(--code);padding:2px 6px;border-radius:4px;word-break:break-all}
+.urlbox{background:#2B2839;color:#E8E6F5;border-radius:9px;padding:13px 15px;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;word-break:break-all;margin-bottom:13px;line-height:1.7}
+.urlbox .hl{color:#B9AFFF}
+.urlbox .cm{color:#8A87A8}
+ul{margin:0 0 12px 19px}
+li{margin-bottom:5px}
+.seq{counter-reset:s}
+.seq .row{display:grid;grid-template-columns:78px 1fr 190px;gap:14px;padding:12px 0;border-bottom:1px solid #F0EFF5;align-items:start}
+.seq .row:last-child{border:none}
+.sid{font-family:ui-monospace,Consolas,monospace;font-size:12px;font-weight:700;color:var(--pp);background:var(--pp-l);padding:3px 8px;border-radius:5px;text-align:center}
+.sd .t{font-weight:700;margin-bottom:2px}
+.sd .d{font-size:13px;color:var(--tx2)}
+.sf{font-size:12.5px;color:var(--tx2);text-align:right}
+.arch{display:flex;flex-direction:column;align-items:center;gap:0}
+.node{width:100%;max-width:620px;background:#fff;border:1px solid var(--bd);border-radius:11px;padding:14px 16px}
+.node.acc{border:2px solid var(--pp);background:var(--pp-l)}
+.node .lay{font-size:11px;font-weight:700;color:var(--pp);letter-spacing:.3px;margin-bottom:4px}
+.node .nm{font-weight:700;font-size:14.5px;margin-bottom:3px}
+.node .ds{font-size:12.5px;color:var(--tx2);line-height:1.55}
+.conn{color:var(--tx3);font-size:12px;padding:7px 0;font-family:ui-monospace,Consolas,monospace}
+.mock{background:#fff;border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.mock .bar{background:#F5F4FA;padding:8px 13px;font-size:11.5px;color:var(--tx2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:6px;font-family:ui-monospace,Consolas,monospace}
+.dot{width:7px;height:7px;border-radius:50%;background:#D3D1DE}
+.mb{padding:17px}
+.frow{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #F2F1F7;font-size:13px;align-items:center}
+.frow:last-child{border:none}
+.flab{color:var(--tx2);font-weight:600}
+.finp{border:1px solid #D7D5E3;border-radius:6px;padding:6px 10px;background:#fff;font-size:12.5px;display:inline-flex;justify-content:space-between;align-items:center;gap:8px}
+.finp.err{border-color:var(--dg)}
+.ftag{font-size:12px;color:var(--ok);font-weight:600}
+.ftag.e{color:var(--dg)}
+.btn{display:inline-block;background:var(--pp);color:#fff;border-radius:6px;padding:8px 20px;font-size:13px;font-weight:700}
+.btn.sec{background:#fff;color:var(--tx2);border:1px solid #D7D5E3}
+.phone{max-width:326px;margin:0 auto;border:1px solid var(--bd);border-radius:18px;overflow:hidden;background:#fff}
+.ph-hd{padding:13px 15px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;font-size:14px;font-weight:700}
+.ph-b{padding:19px 15px}
+.ph-cta{background:var(--pp);color:#fff;text-align:center;padding:16px;font-weight:700;font-size:14.5px}
+.ro{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #F0EFF5;font-size:13.5px}
+.ro:last-child{border:none}
+.ro .k{color:var(--tx2)}
+.ro .v{font-weight:700}
+.alert{background:#fff;border-radius:12px;padding:20px 16px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.1)}
+.dim{background:rgba(30,28,45,.45);border-radius:10px;padding:20px 14px}
+.exid{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;font-weight:700;color:var(--pp);margin-bottom:8px}
+.foot{text-align:center;color:var(--tx3);font-size:12.5px;margin-top:46px;padding-top:20px;border-top:1px solid var(--bd);line-height:1.8}
+@media(max-width:700px){.frow,.seq .row{grid-template-columns:1fr;gap:4px}.sf{text-align:left}.kv{flex-direction:column;gap:2px}.kv .k{min-width:auto}}
+</style>
+</head>
+<body>
+<header>
+<div class="hd">
+<div class="eyebrow">유모바일 · 제휴 채널 연동</div>
+<h1>제휴 채널 다이렉트 연동 및 CMS 정책 관리</h1>
+<p class="sub">제휴 채널에서 구성된 단말·요금제 조합을 프로모션 정책 코드로 전달받아 가입 퍼널에 승계하고, 진입 채널을 구입처로 귀속시키는 연동 체계입니다.</p>
+<div class="meta">
+<span class="chip n">문서 기준일 2026-07-28</span>
+<span class="chip">설계 v1.4 · 기능정의 v2.4 · WF v2.4</span>
+<span class="chip g">확정 8건</span>
+<span class="chip w">미확정 2건 · 개발 협의 6건</span>
+</div>
+<nav>
+<button class="on" data-t="s0">개요</button>
+<button data-t="s1">시스템 정의·설계</button>
+<button data-t="s2">기능 정의</button>
+<button data-t="s3">화면 설계</button>
+<button data-t="s4">이슈 트래킹</button>
+</nav>
+</div>
+</header>
+<div class="wrap">
+
+<section id="s0" class="on">
+<h2>추진 개요</h2>
+<div class="note"><span class="nt">한 줄 정의</span>제휴 채널(초기 구축: 모요)의 이벤트 상세 페이지에서 구성된 <b>단말(색상 지정) + 요금제 조합</b>을 프로모션 정책 코드(<span class="mono">promoNo</span>)로 식별해, 유모바일 가입 퍼널에 <b>구매 정보를 승계</b>하고 <b>진입 채널을 구입처로 귀속</b>시킵니다.</div>
+
+<div class="grid g3">
+<div class="card"><div class="badge b-new">목표 1</div><h3 style="margin:9px 0 5px;font-size:14.5px">퍼널 단축</h3><p style="font-size:13px;color:var(--tx2);margin:0">단말 상세페이지의 옵션 재선택 단계를 스킵. 퍼널 스텝 축소를 통한 전환율 개선</p></div>
+<div class="card"><div class="badge b-new">목표 2</div><h3 style="margin:9px 0 5px;font-size:14.5px">채널 어트리뷰션</h3><p style="font-size:13px;color:var(--tx2);margin:0">정책 코드 단위로 구입처를 귀속. 채널별 성과 측정 및 정산 근거 확보</p></div>
+<div class="card"><div class="badge b-new">목표 3</div><h3 style="margin:9px 0 5px;font-size:14.5px">운영 자율성</h3><p style="font-size:13px;color:var(--tx2);margin:0">CMS 정책 등록만으로 프로모션 운영. 배포 의존성 제거</p></div>
+</div>
+
+<h2>To-Be 진입 아키텍처</h2>
+<div class="card">
+<div class="arch">
+<div class="node"><div class="lay">EXTERNAL</div><div class="nm">제휴 채널 — 모요</div><div class="ds">이벤트 상세 페이지에 단말+요금제 조합 노출, 정책 코드를 쿼리스트링에 포함해 아웃바운드</div></div>
+<div class="conn">│ GET · promoNo 파라미터<br>▼</div>
+<div class="node acc"><div class="lay">FRONT · 신규</div><div class="nm">정책 확인 페이지 <span class="mono">/onsale/partnerPromo</span></div><div class="ds">파라미터 검증 · 재고/요금제 상태 조회 · 예외 폴백 분기 · read-only 렌더 · 검증 결과 세션 적재</div></div>
+<div class="conn">│ GET · 세션 승계 (파라미터 없음)<br>▼</div>
+<div class="node"><div class="lay">FRONT · 기존</div><div class="nm">가입신청서 <span class="mono">/onsale/joinHowtoOpen</span></div><div class="ds">세션에서 구매정보 복원 후 개통 유형 선택. 화면 규격 변경 없음</div></div>
+</div>
+</div>
+<div class="note n"><span class="nt">검증 게이트 위치</span>검증과 예외 처리는 <b>정책 확인 페이지 진입 시점에 전량 선행</b>됩니다. 예외 발생 시 가입신청서에 도달하지 않으므로, 유효하지 않은 구성이 퍼널 하류로 유입되지 않습니다.</div>
+
+<h2>개발 대상 범위</h2>
+<div class="tw"><table>
+<tr><th style="width:90px">Layer</th><th style="width:190px">대상</th><th style="width:80px">구분</th><th>범위</th></tr>
+<tr><td>Front</td><td>정책 확인 페이지</td><td><span class="badge b-new">신규</span></td><td>파라미터 검증, 예외 폴백, read-only 렌더, 세션 적재</td></tr>
+<tr><td>Front</td><td>가입신청서</td><td><span class="badge b-old">기존</span></td><td>세션 복원 및 구매정보 세팅 (화면 규격 변경 없음)</td></tr>
+<tr><td>Front</td><td>단말 목록 / 상세</td><td><span class="badge b-old">기존</span></td><td>예외 폴백 목적지</td></tr>
+<tr><td>Back</td><td>정책/상품 API</td><td><span class="badge b-new">신규</span></td><td>정책 조회, 유효성 검증, 재고·요금제 상태 조회</td></tr>
+<tr><td>Back</td><td>CMS 제휴 상품 관리</td><td><span class="badge b-new">신규</span></td><td>정책 리스트·등록·수정 (PC 웹 전용)</td></tr>
+</table></div>
+
+<h2>설계 원칙</h2>
+<div class="grid g2">
+<div class="card"><h3 style="margin-top:0;font-size:14.5px">Read-only 렌더 원칙</h3><p style="font-size:13px;color:var(--tx2);margin:0">정책 지정 값은 선택 컨트롤(radio/select) 없이 텍스트·배지로만 렌더합니다. 미선택 옵션은 DOM에서 제외해 조작 가능 오인을 차단합니다. 변경은 상담 프로세스에서 처리합니다.</p></div>
+<div class="card"><h3 style="margin-top:0;font-size:14.5px">어트리뷰션 보전 원칙</h3><p style="font-size:13px;color:var(--tx2);margin:0">정책 자체가 무효(EX-01)일 때만 구입처를 유모바일로 전환합니다. 정책은 유효하나 재고·요금제 사유로 차단된 경우(EX-02~04)는 구입처 귀속을 유지합니다.</p></div>
+
+<div class="card"><h3 style="margin-top:0;font-size:14.5px">혜택 비적용 원칙</h3><p style="font-size:13px;color:var(--tx2);margin:0">정책 코드 진입에 따른 추가 혜택은 없습니다. 단말 상세페이지 전용 혜택인 U폰 캐시 할인과 쓰던 폰 보상 판매는 노출·적용 대상에서 제외합니다.</p></div>
+</div>
+</section>
+<section id="s1">
+<h2>1. 시스템 정의</h2>
+<div class="card">
+<div class="kv"><div class="k">목적</div><div>제휴 채널 구성 상품의 가입 퍼널 승계 및 진입 채널 구입처 귀속</div></div>
+<div class="kv"><div class="k">최종 사용자</div><div>제휴 채널 이벤트 상세를 통해 유입되는 가입 의향 고객</div></div>
+<div class="kv"><div class="k">운영 주체</div><div>CMS에서 제휴 정책을 등록·운영하는 내부 담당자</div></div>
+<div class="kv"><div class="k">제휴 파트너</div><div>상품 노출 및 아웃바운드 링크를 운영하는 채널 (초기: 모요)</div></div>
+<div class="kv"><div class="k">정책 식별자</div><div><span class="mono">promoNo</span> — 영문·숫자 랜덤 8자리, 등록 시 자동 채번</div></div>
+</div>
+
+<h3>기대 효과</h3>
+<ul>
+<li>옵션 재선택 스텝 제거로 퍼널 이탈 지점 축소 → 가입 완료율 개선</li>
+<li>정책 코드 단위 어트리뷰션 확보로 채널별 성과 측정·정산 근거 확립</li>
+<li>진입 직후 구성 확인 단계를 통한 채널 노출 정보와 실제 가입 구성의 정합성 인지 → 상담 단계 클레임 감소</li>
+<li>정책 등록만으로 프로모션 운영 가능 → 배포 리드타임 제거</li>
+</ul>
+
+<h3>제약 조건</h3>
+<div class="tw"><table>
+<tr><th style="width:150px">항목</th><th>정의</th></tr>
+<tr><td>혜택 정책</td><td>정책 코드 진입에 따른 추가 혜택 없음</td></tr>
+<tr><td>미제공 서비스</td><td>U폰 캐시 할인, 쓰던 폰 보상 판매 (단말 상세페이지 전용 혜택)</td></tr>
+<tr><td>렌더 방식</td><td>정책 지정 값 read-only. 선택 컨트롤 미제공. 변경은 상담 프로세스에서 처리</td></tr>
+<tr><td>Key 정책</td><td><span class="mono">promoNo</span> 유일. 그 외 항목의 중복 제약 없음 (동일 조합 복수 정책 허용)</td></tr>
+<tr><td>링크 규격</td><td><span class="mono">/onsale/partnerPromo?promoNo={정책코드}</span> — 기존 시트 규격에서 변경, 제휴사 전달 필요</td></tr>
+</table></div>
+
+<h2>2. 컴포넌트 구성</h2>
+<div class="tw"><table>
+<tr><th style="width:80px">Layer</th><th style="width:180px">컴포넌트</th><th style="width:70px">구분</th><th>책임</th></tr>
+<tr><td>Front</td><td>정책 확인 페이지</td><td><span class="badge b-new">신규</span></td><td>파라미터 파싱·검증, 예외 폴백 분기, read-only 렌더, 세션 적재</td></tr>
+<tr><td>Front</td><td>가입신청서</td><td><span class="badge b-old">기존</span></td><td>세션 기반 구매정보 복원, 개통 유형 선택</td></tr>
+<tr><td>Front</td><td>단말 목록 / 상세</td><td><span class="badge b-old">기존</span></td><td>예외 폴백 목적지</td></tr>
+<tr><td>API</td><td>정책/상품 서비스</td><td><span class="badge b-new">신규</span></td><td>정책 조회, 기간·사용여부 검증, 재고 조회, 요금제 노출 상태 조회</td></tr>
+<tr><td>Back</td><td>CMS 제휴 상품 관리</td><td><span class="badge b-new">신규</span></td><td>정책 CRUD, 코드 검증, 링크 발급</td></tr>
+</table></div>
+
+<h2>3. 데이터 플로우</h2>
+<div class="card">
+<h4>정상 시퀀스</h4>
+<div class="seq">
+<div class="row"><div class="sid">SEQ 0</div><div class="sd"><div class="t">정책 등록 (사전)</div><div class="d">운영자가 CMS에서 정책 등록 → promoNo 자동 채번 → 링크 발급 후 제휴사 전달</div></div><div class="sf">CMS → DB</div></div>
+<div class="row"><div class="sid">SEQ 1</div><div class="sd"><div class="t">아웃바운드 진입</div><div class="d">제휴 채널 이벤트 상세에서 상품 클릭 → 정책 확인 페이지로 GET 진입</div></div><div class="sf">채널 → Front</div></div>
+<div class="row"><div class="sid">SEQ 2</div><div class="sd"><div class="t">유효성 검증</div><div class="d">정책 조회 + 재고 조회 + 요금제 노출 상태 조회 (실시간, 캐싱 미적용)</div></div><div class="sf">Front → API</div></div>
+<div class="row"><div class="sid">SEQ 3</div><div class="sd"><div class="t">read-only 렌더</div><div class="d">검증 통과 시 정책 지정 값을 선택 컨트롤 없이 렌더</div></div><div class="sf">Front → 사용자</div></div>
+<div class="row"><div class="sid">SEQ 4</div><div class="sd"><div class="t">세션 적재 및 이동</div><div class="d">CTA 클릭 → 검증된 정책 값을 서버 세션에 적재 → joinHowtoOpen으로 GET 이동 (파라미터 없음)</div></div><div class="sf">Front → Front</div></div>
+<div class="row"><div class="sid">SEQ 5</div><div class="sd"><div class="t">세션 복원</div><div class="d">세션 조회만으로 구매정보 복원 후 개통 유형 선택 화면 노출</div></div><div class="sf">Front → 사용자</div></div>
+</div>
+<h4 style="margin-top:20px">예외 분기</h4>
+<div class="seq">
+<div class="row"><div class="sid">EX-01</div><div class="sd"><div class="t">정책 무효</div><div class="d">판매처를 유모바일로 전환 후 무안내로 단말 목록 이동</div></div><div class="sf">퍼널 이탈</div></div>
+<div class="row"><div class="sid">EX-02~04</div><div class="sd"><div class="t">재고·요금제 사유</div><div class="d">구입처 귀속 유지 상태로 Alert 노출 → 확인 시 목록 또는 상세 이동</div></div><div class="sf">퍼널 이탈</div></div>
+</div>
+</div>
+
+<h2>4. 데이터 모델 (초안)</h2>
+<div class="tw"><table>
+<tr><th style="width:150px">컬럼</th><th style="width:130px">타입</th><th>정의</th></tr>
+<tr><td class="mono">promo_no</td><td>CHAR(8) · PK</td><td>영문·숫자 랜덤 8자리 자동 채번. 제휴 링크 변수로 사용</td></tr>
+<tr><td class="mono">channel_cd</td><td>VARCHAR · NN</td><td>구입처 코드. 기존 CMS 구입처 마스터 FK 참조</td></tr>
+<tr><td class="mono">start_dt</td><td>DATETIME · NN</td><td>정책 적용 시작 일시 (10분 단위)</td></tr>
+<tr><td class="mono">end_dt</td><td>DATETIME · NN</td><td>정책 적용 종료 일시 (10분 단위, start_dt ≤ end_dt 제약)</td></tr>
+<tr><td class="mono">model_cd</td><td>VARCHAR · NN</td><td>단말 모델 코드</td></tr>
+<tr><td class="mono">color_cd</td><td>VARCHAR · NN</td><td>단말 색상 코드 (model_cd 종속)</td></tr>
+<tr><td class="mono">plan_cd</td><td>VARCHAR · NN</td><td>요금제 코드 (단말 요금제 범위 내)</td></tr>
+<tr><td class="mono">installment</td><td>VARCHAR · NN</td><td>12 / 24 / 30 / 36 / 0(일시불)</td></tr>
+<tr><td class="mono">discount_type</td><td>VARCHAR · NN</td><td>DEVICE(단말 가격 할인, default) / TELECOM(통신요금 할인)</td></tr>
+<tr><td class="mono">use_yn</td><td>CHAR(1) · NN</td><td>사용 여부. CMS에서 토글, EX-01 판정 기준</td></tr>
+<tr><td class="mono">reg_id / reg_dt<br>upd_id / upd_dt</td><td>—</td><td>Audit 컬럼 (CMS 표준 준용)</td></tr>
+</table></div>
+<div class="note"><span class="nt">조회 정책</span>정책 조회 API는 <b>캐싱 미적용(실시간 조회)</b>입니다. 10분 단위 기간 정밀도와 use_yn 토글의 즉시 반영이 요구되므로 TTL 기반 캐싱을 배제했습니다.</div>
+</section>
+<section id="s2">
+<h2>1. URL 및 진입 규격</h2>
+<div class="urlbox"><span class="cm">// 제휴 채널 아웃바운드 링크</span><br>https://www.uplusumobile.com/onsale/<span class="hl">partnerPromo</span>?promoNo=<span class="hl">{프로모션 정책 코드}</span><br><br><span class="cm">// CTA 이동 대상 (GET · 세션 승계 · 파라미터 미전송)</span><br>https://www.uplusumobile.com/onsale/joinHowtoOpen</div>
+<div class="tw"><table>
+<tr><th style="width:50px">#</th><th style="width:170px">화면</th><th style="width:70px">구분</th><th>Path</th><th style="width:80px">Method</th></tr>
+<tr><td>①</td><td>정책 확인 페이지</td><td><span class="badge b-new">신규</span></td><td class="mono">/onsale/partnerPromo?promoNo={코드}</td><td>GET</td></tr>
+<tr><td>②</td><td>가입신청서</td><td><span class="badge b-old">기존</span></td><td class="mono">/onsale/joinHowtoOpen</td><td>GET</td></tr>
+<tr><td>③</td><td>단말 목록 / 상세</td><td><span class="badge b-old">기존</span></td><td>예외 폴백 목적지 (경로 개발 확정)</td><td>GET</td></tr>
+</table></div>
+<div class="note w"><span class="nt">제휴사 협의 필요</span>기존 시트에 확정된 <span class="mono">joinHowtoOpen?promoNo=</span> 규격에서 변경됩니다. 오픈 전 모요 측 링크 교체가 선행되어야 합니다.</div>
+
+<h2>2. 파라미터 검증 시퀀스</h2>
+<p class="lead">정책 확인 페이지 진입 시점에 서버 검증으로 수행합니다. 선순위 STEP에서 차단되면 후순위 검증은 실행하지 않습니다.</p>
+<div class="card seq">
+<div class="row"><div class="sid">STEP 1</div><div class="sd"><div class="t">파라미터 파싱</div><div class="d">promoNo 존재 여부 및 형식 검증 (영문·숫자 8자리)</div></div><div class="sf">실패 → <b>EX-01</b></div></div>
+<div class="row"><div class="sid">STEP 2</div><div class="sd"><div class="t">정책 존재 검증</div><div class="d">promoNo를 Key로 정책 레코드 조회</div></div><div class="sf">실패 → <b>EX-01</b></div></div>
+<div class="row"><div class="sid">STEP 3</div><div class="sd"><div class="t">사용 여부 검증</div><div class="d"><span class="mono">use_yn = 'Y'</span> 여부 확인</div></div><div class="sf">실패 → <b>EX-01</b></div></div>
+<div class="row"><div class="sid">STEP 4</div><div class="sd"><div class="t">유효 기간 검증</div><div class="d"><span class="mono">start_dt ≤ now ≤ end_dt</span></div></div><div class="sf">실패 → <b>EX-01</b></div></div>
+<div class="row"><div class="sid">STEP 5</div><div class="sd"><div class="t">단말 재고 검증</div><div class="d">model_cd + color_cd 재고 조회, 동일 모델 타 색상 재고 유무 판별</div></div><div class="sf">색상 품절 → <b>EX-02</b><br>전 색상 품절 → <b>EX-03</b></div></div>
+<div class="row"><div class="sid">STEP 6</div><div class="sd"><div class="t">요금제 상태 검증</div><div class="d">요금제 속성 "사용자 노출 활성화" = 사용 여부 확인</div></div><div class="sf">실패 → <b>EX-04</b></div></div>
+<div class="row"><div class="sid">STEP 7</div><div class="sd"><div class="t">렌더</div><div class="d">정책 지정 값 read-only 렌더, 검증 결과를 서버 세션에 적재</div></div><div class="sf">—</div></div>
+</div>
+<div class="note n"><span class="nt">처리 원칙</span>STEP 1~4 실패는 사유를 구분하지 않고 모두 EX-01로 동일 처리합니다. STEP 5~6 실패 시에는 구입처를 정책 지정 값으로 유지해 어트리뷰션을 보전합니다. 우선순위는 <b>EX-01 &gt; EX-02/03 &gt; EX-04</b> 입니다.</div>
+
+<h2>3. 렌더 데이터 정의</h2>
+<div class="tw"><table>
+<tr><th style="width:45px">#</th><th style="width:130px">항목</th><th style="width:150px">Source</th><th>렌더 형태</th><th style="width:90px">Interaction</th></tr>
+<tr><td class="mono">C-01</td><td>구입처</td><td class="mono">channel_cd</td><td>채널명 배지</td><td><span class="badge b-dg">read-only</span></td></tr>
+<tr><td class="mono">C-02</td><td>단말 모델</td><td class="mono">model_cd</td><td>모델명 + 이미지 (상품 마스터 조회)</td><td><span class="badge b-dg">read-only</span></td></tr>
+<tr><td class="mono">C-03</td><td>단말 색상</td><td class="mono">color_cd</td><td>색상명 텍스트</td><td><span class="badge b-dg">read-only</span></td></tr>
+<tr><td class="mono">C-04</td><td>요금제</td><td class="mono">plan_cd</td><td>요금제명 + 월 요금</td><td><span class="badge b-dg">read-only</span></td></tr>
+<tr><td class="mono">C-05</td><td>할부개월</td><td class="mono">installment</td><td>12/24/30/36개월 또는 일시불</td><td><span class="badge b-dg">read-only</span></td></tr>
+<tr><td class="mono">C-06</td><td>할인유형</td><td class="mono">discount_type</td><td>단말 가격 할인 또는 통신요금 할인</td><td><span class="badge b-dg">read-only</span></td></tr>
+</table></div>
+<div class="note"><span class="nt">렌더 원칙</span>radio·select 등 선택 컨트롤을 제공하지 않고 label–value 형태로만 렌더합니다. <b>미선택 옵션은 DOM에서 제외</b>해 조작 가능 요소로 오인되지 않도록 합니다.</div>
+
+<h2>4. 승계 처리 (서버 세션)</h2>
+<div class="card">
+<div class="kv"><div class="k">CTA</div><div>[신청서 작성하기] — 하단 fixed, full-width</div></div>
+<div class="kv"><div class="k">저장 시점</div><div>검증 통과(STEP 7) 직후 서버 세션에 적재</div></div>
+<div class="kv"><div class="k">세션 속성명(안)</div><div class="mono">partnerPromoContext</div></div>
+<div class="kv"><div class="k">저장 항목(안)</div><div class="mono">promoNo, channelCd, modelCd, colorCd, planCd, installment, discountType, verifiedAt</div></div>
+<div class="kv"><div class="k">이동 방식</div><div>HTTP GET — <span class="mono">/onsale/joinHowtoOpen</span> (URL 파라미터 미전송)</div></div>
+<div class="kv"><div class="k">수신 측 처리</div><div>세션 조회만으로 구매정보 복원. promoNo 파라미터를 읽지 않음</div></div>
+<div class="kv"><div class="k">세션 부재 시</div><div>정책 미적용 진입으로 처리 (기존 기본 플로우)</div></div>
+<div class="kv"><div class="k">세션 TTL</div><div>미확정 — 30분 권장 (개발 협의)</div></div>
+</div>
+
+<h4>form POST 대비 이점</h4>
+<div class="tw"><table>
+<tr><th style="width:150px">항목</th><th>form POST</th><th>서버 세션 <span class="badge b-ok">채택</span></th></tr>
+<tr><td>새로고침</td><td>재전송 확인 다이얼로그 발생</td><td>정상 유지</td></tr>
+<tr><td>뒤로가기 후 재진입</td><td>재전송 경고 또는 데이터 유실</td><td>세션 유효 시 정상 복원</td></tr>
+<tr><td>URL·DOM 노출</td><td>hidden field가 DOM에 노출</td><td>URL·DOM 모두 미노출</td></tr>
+<tr><td>값 신뢰성</td><td>클라이언트 hidden field — 조작 가능성</td><td><b>서버 보관 값</b> — 클라이언트 조작 불가</td></tr>
+<tr><td>기존 화면 수정</td><td>수신 필드 파싱 로직 필요</td><td>세션 조회만 수행, 파싱 로직 불요</td></tr>
+</table></div>
+<div class="note"><span class="nt">채택 근거</span>세션에는 서버가 이미 검증을 마친 값이 적재되므로, 가입신청서가 수신하는 데이터를 <b>신뢰 가능한 값</b>으로 취급할 수 있습니다. hidden field 방식은 값이 클라이언트를 경유하므로 수신 측 재검증이 사실상 필수가 됩니다.</div>
+
+<h4>고려 사항</h4>
+<div class="tw"><table>
+<tr><th style="width:120px">항목</th><th>내용</th></tr>
+<tr><td>TTL 만료</td><td>세션 부재 시 정책 미적용 기본 플로우로 처리 (파라미터가 없어 재검증 경로 없음)</td></tr>
+<tr><td>멀티탭</td><td>세션 단일 슬롯 구조 — <b>후행 진입 정책이 선행 정책을 덮어씀</b>. 허용 여부 확인 필요</td></tr>
+<tr><td>인프라</td><td>다중 WAS 환경에서 스티키 세션 또는 공유 스토어(Redis 등) 구성 확인 필요</td></tr>
+<tr><td>비로그인</td><td>가입 전 단계이므로 익명 세션 기준. 기존 가입 퍼널 세션 운용 방식 준용</td></tr>
+</table></div>
+
+<h4>재검증 정책 (권장)</h4>
+<div class="tw"><table>
+<tr><th style="width:180px">세션 상태</th><th>처리</th></tr>
+<tr><td>유효</td><td>세션 값으로 구매정보 복원 (+ 재고·요금제 상태 재확인 권장)</td></tr>
+<tr><td>부재 · 만료</td><td>정책 미적용 진입으로 처리 (기존 가입신청서 기본 플로우)</td></tr>
+</table></div>
+
+<h2>5. 예외 처리 매트릭스</h2>
+<div class="note w"><span class="nt">전 건 미확정</span>EX-01~04 모두 시트상 "요청자와 협의 필요" 상태입니다. 아래는 시트 기준으로 정리한 기준선입니다.</div>
+<div class="tw"><table>
+<tr><th style="width:60px">ID</th><th style="width:200px">Trigger</th><th style="width:140px">구입처 처리</th><th>Alert</th><th style="width:170px">Fallback</th></tr>
+<tr><td><b>EX-01</b></td><td>파라미터 부재·형식 오류 / 정책 미존재 / use_yn='N' / 기간 외</td><td><span class="badge b-wn">유모바일 전환</span></td><td>없음 (무안내 즉시 이동)</td><td>단말 목록</td></tr>
+<tr><td><b>EX-02</b></td><td>지정 색상 재고 0 AND 동일 모델 타 색상 재고 존재</td><td><span class="badge b-ok">정책 구입처 유지</span></td><td>"선택하신 색상의 재고가 없습니다. 다른 색상을 선택해주세요."<br><span style="color:var(--tx3);font-size:12px">문구 미확정</span></td><td>단말 상세<br><span style="font-size:12px;color:var(--tx2)">색상·요금제 정보 유지</span></td></tr>
+<tr><td><b>EX-03</b></td><td>지정 모델 전 색상 재고 0</td><td><span class="badge b-ok">정책 구입처 유지</span></td><td>"해당 휴대폰의 재고가 모두 소진되었습니다."<br><span style="color:var(--tx3);font-size:12px">문구 미확정</span></td><td>단말 목록</td></tr>
+<tr><td><b>EX-04</b></td><td>요금제 사용자 노출 활성화 ≠ 사용</td><td><span class="badge b-ok">정책 구입처 유지</span></td><td>"현재 판매중인 요금제가 아닙니다. 요금제를 다시 선택해주세요."<br><span style="color:var(--ok);font-size:12px">시트 확정 문구</span></td><td>단말 상세<br><span style="font-size:12px;color:var(--tx2)">색상·요금제 정보 유지</span></td></tr>
+</table></div>
+<div class="note"><span class="nt">어트리뷰션 분기 근거</span>EX-01은 정책 자체가 무효이므로 채널 성과로 귀속할 근거가 소멸합니다. 반면 EX-02~04는 정책이 유효한 상태에서 재고·요금제 사유로 차단된 것이므로, 채널 유입 사실은 유지되어 구입처 귀속을 보전합니다.</div>
+<h4>공통 규칙</h4>
+<ul>
+<li>Alert는 확인 단일 버튼형. 닫기(X)·취소 미제공 — 이동 외 선택지 없음</li>
+<li>딤 영역 클릭으로 닫기 불가</li>
+<li>확인 클릭 시에만 이동 (EX-01은 Alert 없이 즉시 이동)</li>
+<li>예외 발생 시 <span class="mono">joinHowtoOpen</span>에 도달하지 않음</li>
+</ul>
+
+<h2>6. CMS 기능 정의</h2>
+<div class="card">
+<div class="kv"><div class="k">메뉴 위치</div><div>공통 &gt; 제휴 상품(휴대폰+단말) 관리 <span class="badge b-new">신규</span></div></div>
+<div class="kv"><div class="k">해상도</div><div>PC 웹 전용 (반응형 미대응), 기존 CMS 레이아웃 그리드 준용</div></div>
+<div class="kv"><div class="k">권한</div><div>기존 CMS 권한 체계 준용 (조회 / 등록·수정 권한 분리 권장)</div></div>
+</div>
+
+<h4>정책 리스트</h4>
+<div class="tw"><table>
+<tr><th style="width:100px">구분</th><th>정의</th></tr>
+<tr><td>검색 조건</td><td>promoNo(완전일치) · 구입처(select) · 적용 기간(겹침 기준) · 사용 여부 · 모델 코드(부분일치)</td></tr>
+<tr><td>그리드 컬럼</td><td>No · promoNo · 구입처 · 모델 · 색상 · 요금제 · 할부/할인유형 · 적용 기간 · 상태 · 등록자/등록일</td></tr>
+<tr><td>상태 표기</td><td>진행중 / 예정 / 종료 (기간 기준 자동 산출) + 사용/미사용. 종료·미사용은 시각적 구분</td></tr>
+<tr><td>페이징</td><td>기본 20건 (CMS 표준 준용), 20/50/100 선택</td></tr>
+<tr><td>정렬</td><td>기본 등록일 역순. 적용기간·상태 컬럼 정렬 지원</td></tr>
+<tr><td>링크 복사</td><td>행 단위 전체 링크 클립보드 복사 <span class="mono">/onsale/partnerPromo?promoNo={코드}</span></td></tr>
+</table></div>
+
+<h4>정책 등록 / 수정 — 입력 항목 (전 항목 필수)</h4>
+<div class="tw"><table>
+<tr><th style="width:45px">#</th><th style="width:130px">항목</th><th style="width:120px">컴포넌트</th><th>Validation</th></tr>
+<tr><td>1</td><td>promoNo</td><td>자동 채번</td><td>영문·숫자 랜덤 8자리, uniqueness 보장(충돌 시 재생성). 수정 화면 read-only</td></tr>
+<tr><td>2</td><td>구입처</td><td>Select</td><td>기존 CMS 구입처 마스터 연동. 옵션 표기 <span class="mono">구입처명 (코드)</span></td></tr>
+<tr><td>3</td><td>적용 기간</td><td>Datepicker + Time Select</td><td>10분 단위. <span class="mono">start_dt ≤ end_dt</span> 위반 시 저장 차단</td></tr>
+<tr><td>4</td><td>모델 코드</td><td>Input + 확인 버튼</td><td>상품 마스터 조회 → 모델명 자동 노출. 미존재 시 저장 차단</td></tr>
+<tr><td>5</td><td>색상 코드</td><td>Input + 확인 버튼</td><td>model_cd 종속 검증. 모델 변경 시 색상 검증 상태 초기화</td></tr>
+<tr><td>6</td><td>요금제 코드</td><td>Input + 확인 버튼</td><td>단말 요금제 범위 내에서만 유효. 요금제명 자동 노출</td></tr>
+<tr><td class="mono">C-07</td><td>할부개월</td><td>Radio</td><td>12 / 24 / 30 / 36 / 일시불 중 택1</td></tr>
+<tr><td class="mono">C-08</td><td>할인유형</td><td>Radio</td><td>단말 가격 할인(default) / 통신요금 할인</td></tr>
+<tr><td>9</td><td>사용 여부</td><td>Radio</td><td>사용(default) / 미사용. 미사용 전환 시 즉시 EX-01 판정 (무캐싱)</td></tr>
+</table></div>
+
+<h4>저장 처리</h4>
+<div class="tw"><table>
+<tr><th style="width:100px">구분</th><th>정의</th></tr>
+<tr><td>등록</td><td>검증 통과 시 저장 → promoNo 채번 → 완료 화면에 코드 및 전체 링크 노출 + 복사 버튼</td></tr>
+<tr><td>수정</td><td>promoNo 외 전 항목 수정 가능. promoNo 변경 불가 (배포된 링크 보호)</td></tr>
+<tr><td>중복</td><td>promoNo 외 항목의 중복 제약 없음</td></tr>
+<tr><td>반영 시점</td><td>저장 즉시 반영 (Front 무캐싱 실시간 조회)</td></tr>
+<tr><td>삭제</td><td>물리 삭제 미제공. use_yn = 'N' 전환으로 비활성화</td></tr>
+<tr><td>Audit</td><td>등록자/등록일시, 수정자/수정일시 자동 기록 (CMS 표준 준용)</td></tr>
+</table></div>
+<div class="note"><span class="nt">물리 삭제 배제 근거</span>제휴 채널에 배포된 링크가 유효한 상태에서 레코드가 삭제되면 유입 트래픽의 원인 추적이 불가능해집니다. 비활성화 방식으로 이력을 보전합니다.</div>
+</section>
+<section id="s3">
+<h2>1. CMS 정책 리스트 (PC 웹)</h2>
+<p class="lead">운영자가 정책을 조회·관리하는 진입 화면. 제휴사에 전달할 링크도 이 화면에서 복사합니다.</p>
+<div class="mock" style="margin-bottom:14px">
+<div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:6px">CMS · 공통 &gt; 제휴 상품(휴대폰+단말) 관리</span></div>
+<div class="mb">
+<div style="font-size:15.5px;font-weight:700;margin-bottom:12px">제휴 상품 정책 관리</div>
+
+<div style="background:var(--surface-1);border-radius:8px;padding:12px;margin-bottom:14px">
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--tx2)">
+<span>정책코드</span><span class="finp" style="min-width:100px">&nbsp;</span>
+<span>구입처</span><span class="finp">전체 <span style="color:#9B98AD">▾</span></span>
+<span>사용여부</span><span class="finp">전체 <span style="color:#9B98AD">▾</span></span>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--tx2);margin-top:8px">
+<span>모델코드</span><span class="finp" style="min-width:100px">&nbsp;</span>
+<span>적용기간</span><span class="finp">2026-08-01</span><span>~</span><span class="finp">2026-08-31</span>
+</div>
+<div style="display:flex;justify-content:flex-end;gap:7px;margin-top:10px"><span class="btn sec" style="padding:6px 14px">초기화</span><span class="btn" style="padding:6px 16px">검색</span></div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+<span style="font-size:12.5px;color:var(--tx2)">총 24건</span>
+<div style="display:flex;gap:6px"><span class="finp" style="font-size:11.5px">20건 <span style="color:#9B98AD">▾</span></span><span class="finp" style="font-size:11.5px">엑셀</span><span class="btn" style="padding:6px 14px;font-size:12px">+ 등록</span></div>
+</div>
+
+<div class="tw"><table style="font-size:11.5px">
+<tr><th>No</th><th>정책코드</th><th>구입처</th><th>모델 / 색상</th><th>요금제</th><th>적용 기간</th><th>할부 / 할인</th><th>상태</th></tr>
+<tr><td>24</td><td><span class="mono">A1B2C3D4</span><br><span style="color:var(--pp);font-weight:600">복사</span></td><td>모요<br>(MOYO)</td><td>S25 울트라<br>티타늄 블랙</td><td>5G 프리미어<br>에센셜</td><td>08-01 09:00<br>~08-31 18:00</td><td>24개월<br>단말 가격 할인</td><td><span class="badge b-ok">진행중</span></td></tr>
+<tr><td>23</td><td><span class="mono">K9M2P7QX</span><br><span style="color:var(--pp);font-weight:600">복사</span></td><td>모요<br>(MOYO)</td><td>S25 기본<br>아이스 블루</td><td>5G 슬림</td><td>09-01 00:00<br>~09-30 23:50</td><td>일시불<br>통신요금 할인</td><td><span class="badge b-new">예정</span></td></tr>
+<tr style="color:var(--tx3)"><td>22</td><td><span class="mono">T4R8W1ZC</span><br><span style="color:var(--tx3);font-weight:600">복사</span></td><td>모요<br>(MOYO)</td><td>S24 울트라<br>그레이</td><td>5G 프리미어<br>에센셜</td><td>07-01 09:00<br>~07-27 18:00</td><td>36개월<br>단말 가격 할인</td><td><span class="badge b-old">종료·미사용</span></td></tr>
+</table></div>
+
+<div style="text-align:center;font-size:12px;color:var(--tx2);margin-top:12px">&laquo; &lsaquo; &nbsp;<b style="color:var(--pp)">1</b>&nbsp; 2 &nbsp;&rsaquo; &raquo;</div>
+</div>
+</div>
+
+<h3>1.1 컴포넌트 명세</h3>
+<div class="tw"><table>
+<tr><th style="width:45px">#</th><th style="width:150px">영역</th><th style="width:150px">컴포넌트</th><th>동작</th></tr>
+<tr><td>1</td><td>검색 조건</td><td>Input × 2 / Select × 2 / Datepicker × 2</td><td>정책코드(완전일치) · 구입처 · 사용여부 · 모델코드(부분일치) · 적용기간(겹침 기준)</td></tr>
+<tr><td>2</td><td>초기화</td><td>Button</td><td>전 조건 리셋 후 기본 목록 재조회</td></tr>
+<tr><td>3</td><td>그리드</td><td>Table</td><td>등록일 역순 기본 정렬. 적용기간·상태 컬럼 정렬 지원</td></tr>
+<tr><td>4</td><td>정책코드 셀</td><td>Link + 복사 버튼</td><td>클릭 시 수정 화면 이동 / 복사는 <b>전체 링크</b> 클립보드 복사</td></tr>
+<tr><td>5</td><td>상태</td><td>Badge</td><td>진행중 / 예정 / 종료 (기간 기준 자동 산출) + 사용·미사용</td></tr>
+<tr><td>6</td><td>페이지당 건수</td><td>Select</td><td>20(기본) / 50 / 100</td></tr>
+<tr><td>7</td><td>엑셀 다운로드</td><td>Button</td><td>검색 결과 다운로드 (제공 여부 협의)</td></tr>
+<tr><td>8</td><td>등록</td><td>Button (Primary)</td><td>정책 등록 화면 이동</td></tr>
+</table></div>
+
+<h3>상태 표기 규칙</h3>
+<div class="tw"><table>
+<tr><th style="width:110px">상태</th><th style="width:290px">판정 기준</th><th>표기</th></tr>
+<tr><td>진행중</td><td class="mono">use_yn='Y' AND start_dt ≤ now ≤ end_dt</td><td>기본 표기</td></tr>
+<tr><td>예정</td><td class="mono">use_yn='Y' AND now &lt; start_dt</td><td>기본 표기</td></tr>
+<tr><td>종료</td><td class="mono">now &gt; end_dt</td><td>회색 처리</td></tr>
+<tr><td>미사용</td><td class="mono">use_yn='N'</td><td>회색 처리 (기간과 무관하게 우선 표기)</td></tr>
+</table></div>
+<div class="note n"><span class="nt">링크 복사 형식</span><span class="mono">https://www.uplusumobile.com/onsale/partnerPromo?promoNo={코드}</span> — 공통 기준 C-07</div>
+
+<h2>2. CMS 정책 등록 / 수정 (PC 웹)</h2>
+<p class="lead">기존 CMS 레이아웃 그리드 준용. 좌측 라벨 / 우측 필드 2단 구성, 액션 버튼 우측 정렬.</p>
+<div class="mock" style="margin-bottom:14px">
+<div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:6px">CMS · 공통 &gt; 제휴 상품(휴대폰+단말) 관리 &gt; 정책 등록</span></div>
+<div class="mb">
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:13px"><b style="font-size:15.5px">정책 등록</b><span style="font-size:11.5px;color:var(--tx2)"><span style="color:var(--pp)">*</span> required</span></div>
+<div class="frow"><div class="flab">promoNo</div><div style="color:var(--tx2);font-size:12.5px">저장 시 자동 채번 (영문·숫자 8자리)</div></div>
+<div class="frow"><div class="flab">구입처 <span style="color:var(--pp)">*</span></div><div><span class="finp" style="min-width:190px">모요 (MOYO) <span style="color:#9B98AD">▾</span></span></div></div>
+<div class="frow"><div class="flab">적용 기간 <span style="color:var(--pp)">*</span></div><div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="finp">2026-08-01</span><span class="finp">09:00 <span style="color:#9B98AD">▾</span></span><span style="color:var(--tx2)">~</span><span class="finp">2026-08-31</span><span class="finp">18:00 <span style="color:#9B98AD">▾</span></span></div></div>
+<div class="frow"><div class="flab">모델 코드 <span style="color:var(--pp)">*</span></div><div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap"><span class="finp">PH2508</span><span class="finp">확인</span><span class="ftag">✓ 갤럭시 S25 울트라</span></div></div>
+<div class="frow"><div class="flab">색상 코드 <span style="color:var(--pp)">*</span></div><div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap"><span class="finp">CL07</span><span class="finp">확인</span><span class="ftag">✓ 티타늄 블랙</span></div></div>
+<div class="frow"><div class="flab">요금제 코드 <span style="color:var(--pp)">*</span></div><div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap"><span class="finp err">5GP001</span><span class="finp">확인</span><span class="ftag e">✕ 없는 요금제입니다</span></div></div>
+<div class="frow"><div class="flab">할부개월 <span style="color:var(--pp)">*</span></div><div style="font-size:12.5px;color:var(--tx2);display:flex;gap:13px;flex-wrap:wrap"><span>○ 12</span><span style="color:var(--pp);font-weight:700">● 24</span><span>○ 30</span><span>○ 36</span><span>○ 일시불</span></div></div>
+<div class="frow"><div class="flab">할인유형 <span style="color:var(--pp)">*</span></div><div style="font-size:12.5px;color:var(--tx2);display:flex;gap:16px;flex-wrap:wrap"><span style="color:var(--pp);font-weight:700">● 단말 가격 할인</span><span>○ 통신요금 할인</span></div></div>
+<div class="frow"><div class="flab">사용 여부 <span style="color:var(--pp)">*</span></div><div style="font-size:12.5px;color:var(--tx2);display:flex;gap:16px"><span style="color:var(--pp);font-weight:700">● 사용</span><span>○ 미사용</span></div></div>
+<div style="display:flex;justify-content:flex-end;gap:7px;margin-top:16px"><span class="btn sec">목록</span><span class="btn">저장</span></div>
+</div>
+</div>
+<div class="note n"><span class="nt">인라인 Validation 상태</span>모델·색상은 검증 성공(<span style="color:var(--ok)">✓ + 명칭</span>), 요금제는 검증 실패(<span style="color:var(--dg)">✕ + 오류</span>) 상태를 동시에 표현한 예시입니다. 미검증 또는 실패 항목이 존재하면 저장이 차단됩니다.</div>
+
+<h3>2.1 정책 수정 — 등록 화면과의 차이</h3>
+<div class="mock" style="margin-bottom:14px">
+<div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:6px">CMS · 정책 수정</span></div>
+<div class="mb">
+<div class="frow"><div class="flab">promoNo</div><div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap"><b>A1B2C3D4</b><span class="finp">코드 복사</span><span class="finp">전체 링크 복사</span><span style="font-size:11.5px;color:var(--tx2)">read-only</span></div></div>
+<div style="font-size:12px;color:var(--tx2);padding-top:7px;font-family:ui-monospace,Consolas,monospace">https://www.uplusumobile.com/onsale/partnerPromo?promoNo=A1B2C3D4</div>
+<div style="font-size:12.5px;color:var(--tx2);padding-top:11px">이하 입력 항목은 등록 화면과 동일</div>
+</div>
+</div>
+
+<h2>3. 정책 확인 페이지 (신규 · 모바일)</h2>
+<p class="lead">제휴 링크의 랜딩 지점. 검증·예외 처리를 진입 시점에 전량 수행하고, 통과 시 정책 값을 read-only로 렌더합니다.</p>
+<div class="phone" style="margin-bottom:14px">
+<div class="ph-hd"><span style="color:#9B98AD">‹</span><span>가입 상품 확인</span><span style="color:#9B98AD">✕</span></div>
+<div class="ph-b">
+<div style="font-size:18.5px;font-weight:700;line-height:1.4;margin-bottom:15px">모요에서 선택하신 <span style="color:var(--pp)">상품 정보를 확인</span>해 주세요.</div>
+<div style="border:1px solid var(--bd);border-radius:11px;padding:14px">
+<div style="display:flex;gap:12px;align-items:center;padding-bottom:13px;border-bottom:1px solid #F0EFF5">
+<div style="width:54px;height:68px;background:var(--pp-l);border-radius:7px;flex-shrink:0"></div>
+<div><div style="font-weight:700;font-size:14px">갤럭시 S25 울트라</div><div style="font-size:12.5px;color:var(--tx2);margin-top:3px">티타늄 블랙</div></div>
+</div>
+<div class="ro"><span class="k">요금제</span><span class="v" style="text-align:right">5G 프리미어 에센셜<br><span style="color:var(--pp)">월 85,000원</span></span></div>
+<div class="ro"><span class="k">할부개월</span><span class="v">24개월</span></div>
+<div class="ro"><span class="k">할인유형</span><span class="v">단말 가격 할인</span></div>
+</div>
+
+</div>
+<div class="ph-cta">신청서 작성하기</div>
+</div>
+<div class="note"><span class="nt">컴포넌트 구성</span>전 항목 label–value 행으로만 구성했습니다. 선택 컨트롤이 없고 미선택 옵션(통신요금 할인)은 DOM에서 제외했습니다. CTA는 하단 fixed·full-width이며 클릭 시 검증 값을 세션에 적재하고 파라미터 없이 GET 이동합니다.</div>
+
+<h2>4. 가입신청서 (기존 · 규격 유지)</h2>
+<div class="phone" style="margin-bottom:14px">
+<div class="ph-hd"><span style="color:#9B98AD">‹</span><span>가입신청서</span><span style="color:#9B98AD">✕</span></div>
+<div class="ph-b">
+<div style="font-size:17.5px;font-weight:700;line-height:1.4;margin-bottom:15px">가입을 위한 <span style="color:var(--pp)">개통 방법을 선택</span>해 주세요.</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+<div style="border:1px solid var(--bd);border-radius:11px;padding:13px 9px;text-align:center"><div style="width:32px;height:32px;background:var(--pp-l);border-radius:8px;margin:0 auto 8px"></div><div style="font-weight:700;font-size:13px">셀프 개통</div><div style="font-size:11px;color:var(--tx2);margin-top:4px">10~15분 완료</div></div>
+<div style="border:2px solid var(--pp);border-radius:11px;padding:13px 9px;text-align:center"><div style="width:32px;height:32px;background:var(--pp);border-radius:8px;margin:0 auto 8px"></div><div style="font-weight:700;font-size:13px">상담사 개통</div><div style="font-size:11px;color:var(--tx2);margin-top:4px">전문가가 도와드려요</div></div>
+</div>
+<div style="font-size:11.5px;color:var(--tx2);margin-top:15px;line-height:1.6">세션에서 구매정보 복원 후 기존 플로우 진행. 화면 규격 변경 없음</div>
+</div>
+<div class="ph-cta">개통 시작하기</div>
+</div>
+
+<h2>5. 예외 Alert 설계</h2>
+<div class="grid g2">
+<div class="card"><div class="exid">EX-01 · 정책 무효</div>
+<div style="border:1px dashed #C9C6D9;border-radius:11px;padding:20px;text-align:center;background:#FAFAFC"><div style="font-size:20px;color:#9B98AD;margin-bottom:7px">→</div><div style="font-weight:700;font-size:13.5px">Alert 미노출</div><div style="font-size:12px;color:var(--tx2);margin-top:6px;line-height:1.6">판매처 유모바일 전환 후<br>단말 목록으로 즉시 리다이렉트</div></div>
+<div style="font-size:11.5px;color:var(--wn);margin-top:9px;font-weight:600">무안내 처리는 협의 대상 · 토스트 추가 검토</div></div>
+
+<div class="card"><div class="exid">EX-02 · 지정 색상 재고 0</div>
+<div class="dim"><div class="alert"><div style="font-size:14px;font-weight:700;line-height:1.6">선택하신 색상의<br>재고가 없습니다</div><div style="font-size:12px;color:var(--tx2);margin-top:7px">다른 색상을 선택해 주세요</div><div class="btn" style="display:block;margin-top:15px">확인</div></div></div>
+<div style="font-size:12px;color:var(--tx2);margin-top:9px">확인 → 단말 상세 (색상·요금제 정보 유지)</div></div>
+
+<div class="card"><div class="exid">EX-03 · 전 색상 재고 0</div>
+<div class="dim"><div class="alert"><div style="font-size:14px;font-weight:700;line-height:1.6">해당 휴대폰의 재고가<br>모두 소진되었습니다</div><div class="btn" style="display:block;margin-top:15px">확인</div></div></div>
+<div style="font-size:12px;color:var(--tx2);margin-top:9px">확인 → 단말 목록</div></div>
+
+<div class="card"><div class="exid">EX-04 · 요금제 노출 비활성</div>
+<div class="dim"><div class="alert"><div style="font-size:14px;font-weight:700;line-height:1.6">현재 판매중인<br>요금제가 아닙니다</div><div style="font-size:12px;color:var(--tx2);margin-top:7px">요금제를 다시 선택해 주세요</div><div class="btn" style="display:block;margin-top:15px">확인</div></div></div>
+<div style="font-size:12px;color:var(--tx2);margin-top:9px">확인 → 단말 상세 (색상·요금제 정보 유지)</div></div>
+</div>
+<div class="note n"><span class="nt">Alert 공통 규격</span>확인 단일 버튼형. 닫기(X)·취소 미제공, 딤 영역 클릭 시 닫히지 않음. 본문 렌더 전 노출하며 확인 클릭 시에만 리다이렉트합니다.</div>
+</section>
+
+<section id="s4">
+<h2>확정 사항</h2>
+<div class="tw"><table>
+<tr><th style="width:60px">ID</th><th style="width:210px">항목</th><th>확정 내용</th></tr>
+<tr><td>1</td><td>화면 구성 방식</td><td>신규 정책 확인 페이지 경유 → CTA로 <span class="mono">joinHowtoOpen</span> 이동</td></tr>
+<tr><td>1</td><td>promoNo 채번</td><td>영문·숫자 랜덤 8자리 자동 생성, uniqueness 보장</td></tr>
+<tr><td>2</td><td>중복 등록 제약</td><td>promoNo 외 중복 제약 없음 (동일 조합 복수 정책 허용)</td></tr>
+<tr><td>3</td><td>캐싱 전략</td><td>캐싱 미적용 — 실시간 조회</td></tr>
+<tr><td>4</td><td>구입처 마스터</td><td>기존 CMS 관리 기능 활용 (신규 개발 없음)</td></tr>
+<tr><td>5</td><td>예외 시 정보 승계</td><td>상세페이지 이동 시 색상·요금제 정보 유지</td></tr>
+<tr><td>6</td><td>사용 여부 판정</td><td>CMS 정책 항목의 use_yn 토글 기준</td></tr>
+<tr><td>7</td><td>확인 페이지 URL</td><td class="mono">/onsale/partnerPromo?promoNo={정책코드}</td></tr>
+<tr><td>8</td><td>승계 방식</td><td>서버 세션 단독 승계 — 가입신청서로 URL 파라미터 미전송 <span class="badge b-ok">v1.3 변경</span></td></tr>
+</table></div>
+
+<h2>미확정 · 협의 필요</h2>
+<div class="note w"><span class="nt">개발 착수 선결 과제</span>아래 2건은 확정 전까지 개발 범위와 고객 노출 UX가 고정되지 않습니다.</div>
+<div class="tw"><table>
+<tr><th style="width:60px">ID</th><th style="width:250px">항목</th><th style="width:120px">Owner</th><th>배경</th></tr>
+<tr><td class="mono"><b>O-01</b></td><td>화면 구성 방식 확정<br><span style="font-size:12px;color:var(--tx2)">신규 정책 확인 페이지 경유 여부</span></td><td><span class="badge b-wn">요청자</span></td><td>원 요구사항은 가입신청서 직접 진입이었으나, 정책 구성을 고객에게 확인시키는 신규 페이지를 경유하는 구조로 설계했습니다. 채택 시 신규 화면 개발과 제휴사 링크 규격 변경이 수반되므로 구조 자체의 승인이 선행되어야 합니다.</td></tr>
+<tr><td class="mono"><b>O-02</b></td><td>예외 처리 4건 최종 확정<br><span style="font-size:12px;color:var(--tx2)">EX-01 무안내 정책, EX-02·03 Alert 문구</span></td><td><span class="badge b-wn">요청자</span></td><td>시트상 전 건 "요청자와 협의 필요" 상태. 무안내 리다이렉트는 이탈 원인 인지 불가로 CS 유입 가능성이 있어 토스트 안내 추가 여부 검토가 필요합니다.</td></tr>
+</table></div>
+
+
+<h2>개발 협의 항목</h2>
+<div class="tw"><table>
+<tr><th style="width:60px">ID</th><th style="width:280px">항목</th><th>내용</th></tr>
+<tr><td class="mono">D-01</td><td>세션 저장 항목 및 TTL 값</td><td>저장 필드 규격과 만료 시간 확정 (30분 권장)</td></tr>
+<tr><td class="mono">D-02</td><td>멀티탭 후행 정책 덮어쓰기 허용 여부</td><td>세션 단일 슬롯 구조상 마지막 진입 정책만 유효</td></tr>
+<tr><td class="mono">D-03</td><td>다중 WAS 세션 스토리지 구성</td><td>스티키 세션 또는 공유 스토어(Redis 등)</td></tr>
+<tr><td class="mono">D-04</td><td>세션 복원 시 재고·요금제 재확인 수행 여부</td><td>확인 페이지 체류 중 상태 변경 가능성</td></tr>
+<tr><td class="mono">D-05</td><td>예외 폴백 실제 경로</td><td>목록·상세 페이지 Path 확정</td></tr>
+<tr><td class="mono">D-06</td><td>CMS 코드 검증 트리거 방식</td><td>확인 버튼 클릭 vs blur 자동 검증</td></tr>
+</table></div>
+
+<h2>표준 문구 · 명칭</h2>
+<div class="tw"><table>
+<tr><th style="width:180px">구분</th><th>확정 값</th></tr>
+<tr><td>확인 페이지 헤드라인</td><td>"모요에서 선택하신 상품 정보를 확인해 주세요." — 구입처명을 헤드라인에 포함, 별도 배지 미노출</td></tr>
+<tr><td>CTA 버튼명</td><td><b>신청서 작성하기</b></td></tr>
+<tr><td>EX-02 Alert</td><td>"선택하신 색상의 재고가 없습니다. 다른 색상을 선택해주세요." <span class="badge b-wn">문구 미확정</span></td></tr>
+<tr><td>EX-03 Alert</td><td>"해당 휴대폰의 재고가 모두 소진되었습니다." <span class="badge b-wn">문구 미확정</span></td></tr>
+<tr><td>EX-04 Alert</td><td>"현재 판매중인 요금제가 아닙니다. 요금제를 다시 선택해주세요." <span class="badge b-ok">시트 확정</span></td></tr>
+<tr><td>하단 고정 안내 문구</td><td><b>미노출</b> — 변경 안내·미제공 혜택 안내 모두 삭제</td></tr>
+</table></div>
+
+<div class="note n"><span class="nt">문서 정합성 관리</span>위 확정(C)·미확정(O)·개발 협의(D)·표준 문구는 <b>시스템 정의·설계 / 상세 기능 정의 / 화면 와이어프레임 3개 문서와 본 아티팩트에 동일하게 적용되는 단일 기준</b>입니다. 변경이 발생하면 이 절을 먼저 갱신한 뒤 각 문서 본문에 반영합니다.</div>
+</section>
+
+<div class="foot">제휴 채널 다이렉트 연동 및 CMS 정책 관리<br>시스템 정의·설계 v1.4 · 상세 기능 정의 v2.4 · 화면 와이어프레임 v2.4 · 2026-07-28</div>
+</div>
+<script>
+document.querySelectorAll('nav button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('nav button').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('section').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    document.getElementById(b.dataset.t).classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
