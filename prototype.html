@@ -308,6 +308,16 @@ h1,h2,h3,p{margin:0}
 .hover\:text-brand-500:hover{color:#5B4CDB}
 @media(min-width:640px){.sm\:grid-cols-\[130px_1fr\]{display:grid;grid-template-columns:130px 1fr}.sm\:items-center{align-items:center}.sm\:pt-2{padding-top:8px}.sm\:w-64{width:256px}}
 @media(min-width:1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:col-span-2{grid-column:span 2/span 2}.lg\:grid-cols-\[380px_1fr\]{grid-template-columns:380px 1fr}}
+.ptable{overflow-x:auto;border:1px solid #e2e8f0;border-radius:10px}
+.ptable table{width:100%;border-collapse:collapse;font-size:13px}
+.ptable th{background:#f8fafc;text-align:left;padding:10px 12px;font-weight:700;font-size:12px;color:#64748b;border-bottom:1px solid #e2e8f0;white-space:nowrap}
+.ptable td{padding:10px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+.ptable tbody tr:last-child td{border-bottom:none}
+.prow{cursor:pointer}
+.prow:hover{background:#F3F1FE}
+.prow.dim{color:#94a3b8}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;white-space:nowrap}
+
 </style>
 </head>
 <body class="bg-slate-100 text-slate-900">
@@ -328,20 +338,67 @@ h1,h2,h3,p{margin:0}
 
 <!-- ============ CMS ============ -->
 <section id="tab-cms">
+
+  <div id="cms-list">
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs text-slate-500 mono">CMS · 공통 &gt; 제휴 상품(휴대폰+단말) 관리</div>
+      <div class="p-5">
+        <h2 class="text-lg font-bold mb-4">제휴 상품 정책 관리</h2>
+
+        <div class="bg-slate-50 rounded-lg p-4 mb-4">
+          <div class="flex flex-wrap gap-3 items-center text-sm">
+            <label class="text-slate-500">정책코드</label>
+            <input id="q-code" class="w-40 border border-slate-300 rounded-lg px-3 py-2 text-sm" placeholder="A1B2C3D4">
+            <label class="text-slate-500">구입처</label>
+            <select id="q-channel" class="border border-slate-300 rounded-lg px-3 py-2 text-sm"><option value="">전체</option><option value="MOYO">모요 (MOYO)</option><option value="ETC1">알뜰폰허브 (HUB)</option></select>
+            <label class="text-slate-500">사용여부</label>
+            <select id="q-use" class="border border-slate-300 rounded-lg px-3 py-2 text-sm"><option value="">전체</option><option value="Y">사용</option><option value="N">미사용</option></select>
+            <label class="text-slate-500">모델코드</label>
+            <input id="q-model" class="w-40 border border-slate-300 rounded-lg px-3 py-2 text-sm" placeholder="PH25">
+          </div>
+          <div class="flex justify-end gap-2 mt-3">
+            <button id="q-reset" class="px-4 py-2 text-sm border border-slate-300 rounded-lg bg-white hover:bg-slate-50">초기화</button>
+            <button id="q-search" class="px-5 py-2 text-sm font-bold text-white bg-brand-500 rounded-lg hover:bg-brand-700">검색</button>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-2">
+          <span id="list-count" class="text-sm text-slate-500">총 0건</span>
+          <div class="flex gap-2">
+            <button id="btn-excel" class="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">엑셀</button>
+            <button id="btn-new" class="px-5 py-2 text-sm font-bold text-white bg-brand-500 rounded-lg hover:bg-brand-700">+ 등록</button>
+          </div>
+        </div>
+
+        <div class="ptable">
+          <table>
+            <thead><tr>
+              <th>No</th><th>정책코드</th><th>구입처</th><th>모델 / 색상</th><th>요금제</th><th>적용 기간</th><th>할부 / 할인</th><th>상태</th><th></th>
+            </tr></thead>
+            <tbody id="list-body"></tbody>
+          </table>
+        </div>
+
+        <div class="text-center text-sm text-slate-400 mt-4">&laquo; &lsaquo; <span class="text-brand-500 font-bold">1</span> &rsaquo; &raquo;</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cms-form" class="hidden">
   <div class="grid lg:grid-cols-3 gap-5">
 
     <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 overflow-hidden">
-      <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs text-slate-500 mono">CMS · 공통 &gt; 제휴 상품(휴대폰+단말) 관리 &gt; 정책 등록</div>
+      <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 text-xs text-slate-500 mono"><span id="crumb">CMS · 공통 &gt; 제휴 상품(휴대폰+단말) 관리 &gt; 정책 등록</span></div>
       <div class="p-5">
         <div class="flex items-baseline justify-between mb-4">
-          <h2 class="text-lg font-bold">정책 등록</h2>
+          <h2 id="form-title" class="text-lg font-bold">정책 등록</h2>
           <span class="text-xs text-slate-400"><span class="text-brand-500">*</span> 필수 입력</span>
         </div>
 
         <div class="space-y-4">
           <div class="grid sm:grid-cols-[130px_1fr] gap-2 sm:items-center">
             <label class="text-sm font-semibold text-slate-500">프로모션 코드</label>
-            <div class="text-sm text-slate-400">저장 시 영문·숫자 8자리 자동 채번 <span class="text-xs">(C-01)</span></div>
+            <div id="f-promono" class="text-sm text-slate-400">저장 시 영문·숫자 8자리 자동 채번 <span class="text-xs">(C-01)</span></div>
           </div>
 
           <div class="grid sm:grid-cols-[130px_1fr] gap-2 sm:items-center">
@@ -393,7 +450,7 @@ h1,h2,h3,p{margin:0}
             <label class="text-sm font-semibold text-slate-500 sm:pt-2">요금제 코드 <span class="text-brand-500">*</span></label>
             <div>
               <div class="flex gap-2">
-                <input id="f-plan" placeholder="5GP001" class="w-40 border border-slate-300 rounded-lg px-3 py-2 text-sm">
+                <input id="f-plan" placeholder="5GP100" class="w-40 border border-slate-300 rounded-lg px-3 py-2 text-sm">
                 <button data-check="plan" class="chk px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">확인</button>
               </div>
               <p id="r-plan" class="text-xs mt-1 text-slate-400">유효 코드: 5GP100 / 5GS200</p>
@@ -417,24 +474,23 @@ h1,h2,h3,p{margin:0}
         </div>
 
         <div class="flex justify-end gap-2 mt-6 pt-5 border-t border-slate-200">
-          <button id="btn-reset" class="px-5 py-2.5 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">초기화</button>
+          <button id="btn-back" class="px-5 py-2.5 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">목록</button>
           <button id="btn-save" class="px-7 py-2.5 text-sm font-bold text-white bg-brand-500 rounded-lg hover:bg-brand-700">저장</button>
         </div>
       </div>
     </div>
 
     <div class="space-y-4">
-      <div class="bg-white rounded-xl border border-slate-200 p-5">
-        <h3 class="text-sm font-bold mb-3">등록된 정책</h3>
-        <div id="policy-list" class="space-y-2 text-xs"></div>
-      </div>
       <div class="bg-brand-50 rounded-xl p-4 text-xs text-brand-900 leading-relaxed">
         <p class="font-bold mb-1.5">테스트 안내</p>
         <p>모델 <span class="mono">PH2508</span>, 색상 <span class="mono">CL07</span>, 요금제 <span class="mono">5GP100</span> 을 입력하고 확인을 누르면 검증에 통과합니다. 잘못된 코드로도 시도해 보세요.</p>
       </div>
     </div>
   </div>
+  </div>
+
 </section>
+
 
 <!-- ============ FRONT ============ -->
 <section id="tab-front" class="hidden">
@@ -621,6 +677,7 @@ function mark(el,ok,msg){
   $(el).textContent=(ok?'✓ ':'✕ ')+msg;
   $(el).className='text-xs mt-1 font-semibold '+(ok?'text-emerald-600':'text-red-600');
 }
+function hint(el,msg){ $(el).textContent=msg; $(el).className='text-xs mt-1 text-slate-400'; }
 document.querySelectorAll('.chk').forEach(function(b){
   b.onclick=function(){
     var t=b.dataset.check;
@@ -645,6 +702,104 @@ document.querySelectorAll('.chk').forEach(function(b){
   };
 });
 
+/* ---------- CMS: 목록 ---------- */
+var CH={MOYO:'모요 (MOYO)',ETC1:'알뜰폰허브 (HUB)'};
+var editing=null;
+
+function statusOf(p){
+  if(p.use==='N') return {t:'미사용',c:'bg-slate-200 text-slate-600',dim:true};
+  var now='2026-07-28 12:00';
+  if(now < p.sd) return {t:'예정',c:'bg-brand-50 text-brand-700',dim:false};
+  if(now > p.ed) return {t:'종료',c:'bg-slate-200 text-slate-600',dim:true};
+  return {t:'진행중',c:'bg-emerald-50 text-emerald-700',dim:false};
+}
+function fmtInst(v){ return v==='0'?'일시불':v+'개월'; }
+function fmtDisc(v){ return v==='DEVICE'?'단말 가격 할인':'통신요금 할인'; }
+function linkOf(no){ return 'https://www.uplusumobile.com/onsale/partnerPromo?promoNo='+no; }
+
+function filtered(){
+  var qc=$('q-code').value.trim().toUpperCase(), qh=$('q-channel').value, qu=$('q-use').value, qm=$('q-model').value.trim().toUpperCase();
+  return policies.filter(function(p){
+    if(qc && p.no!==qc) return false;
+    if(qh && p.ch!==qh) return false;
+    if(qu && p.use!==qu) return false;
+    if(qm && p.model.indexOf(qm)<0) return false;
+    return true;
+  });
+}
+function renderList(){
+  var rows=filtered();
+  $('list-count').textContent='총 '+rows.length+'건';
+  if(!rows.length){ $('list-body').innerHTML='<tr><td colspan="9" class="text-center text-slate-400 py-5">조회된 정책이 없습니다</td></tr>'; return; }
+  $('list-body').innerHTML=rows.map(function(p,i){
+    var st=statusOf(p);
+    return '<tr class="prow'+(st.dim?' dim':'')+'" data-no="'+p.no+'">'+
+      '<td>'+(rows.length-i)+'</td>'+
+      '<td><span class="mono font-bold text-brand-500">'+p.no+'</span></td>'+
+      '<td>'+CH[p.ch]+'</td>'+
+      '<td>'+MASTER.models[p.model]+'<br><span class="text-slate-400">'+MASTER.colors[p.model][p.color]+'</span></td>'+
+      '<td>'+MASTER.plans[p.plan].name+'</td>'+
+      '<td class="mono text-xs">'+p.sd+'<br>~'+p.ed+'</td>'+
+      '<td>'+fmtInst(p.inst)+'<br><span class="text-slate-400">'+fmtDisc(p.disc)+'</span></td>'+
+      '<td><span class="badge '+st.c+'">'+st.t+'</span></td>'+
+      '<td><button class="copy px-3 py-1 text-xs border border-slate-300 rounded bg-white" data-no="'+p.no+'">링크 복사</button></td>'+
+      '</tr>';
+  }).join('');
+  document.querySelectorAll('#list-body .prow').forEach(function(tr){
+    tr.onclick=function(e){ if(e.target.classList.contains('copy')) return; openForm(tr.dataset.no); };
+  });
+  document.querySelectorAll('#list-body .copy').forEach(function(b){
+    b.onclick=function(e){
+      e.stopPropagation();
+      var url=linkOf(b.dataset.no);
+      if(navigator.clipboard) navigator.clipboard.writeText(url);
+      alert('제휴 링크가 복사되었습니다.\n\n'+url);
+    };
+  });
+}
+function showList(){ $('cms-list').classList.remove('hidden'); $('cms-form').classList.add('hidden'); renderList(); }
+function showForm(){ $('cms-list').classList.add('hidden'); $('cms-form').classList.remove('hidden'); }
+
+function openForm(no){
+  editing=no||null;
+  if(no){
+    var p=policies.filter(function(x){return x.no===no;})[0];
+    $('form-title').textContent='정책 수정';
+    $('crumb').innerHTML='CMS · 공통 &gt; 제휴 상품(휴대폰+단말) 관리 &gt; 정책 수정';
+    $('f-promono').innerHTML='<span class="mono font-bold">'+p.no+'</span> <button id="copy-one" class="px-3 py-1 text-xs border border-slate-300 rounded bg-white">링크 복사</button> <span class="text-xs text-slate-400">수정 불가</span>';
+    $('copy-one').onclick=function(){ var u=linkOf(p.no); if(navigator.clipboard) navigator.clipboard.writeText(u); alert('제휴 링크가 복사되었습니다.\n\n'+u); };
+    $('f-channel').value=p.ch;
+    $('f-sdate').value=p.sd.split(' ')[0]; $('f-stime').value=p.sd.split(' ')[1];
+    $('f-edate').value=p.ed.split(' ')[0]; $('f-etime').value=p.ed.split(' ')[1];
+    $('f-model').value=p.model; $('f-color').value=p.color; $('f-plan').value=p.plan;
+    state.model=p.model; state.color=p.color; state.plan=p.plan;
+    state.inst=p.inst; state.disc=p.disc; state.use=p.use;
+    mark('r-model',true,MASTER.models[p.model]);
+    mark('r-color',true,MASTER.colors[p.model][p.color]);
+    mark('r-plan',true,MASTER.plans[p.plan].name);
+  }else{
+    $('form-title').textContent='정책 등록';
+    $('crumb').innerHTML='CMS · 공통 &gt; 제휴 상품(휴대폰+단말) 관리 &gt; 정책 등록';
+    $('f-promono').innerHTML='저장 시 영문·숫자 8자리 자동 채번 <span class="text-xs">(C-01)</span>';
+    $('f-promono').className='text-sm text-slate-400';
+    $('f-channel').value=''; $('f-model').value=''; $('f-color').value=''; $('f-plan').value='';
+    $('f-sdate').value='2026-08-01'; $('f-stime').value='09:00';
+    $('f-edate').value='2026-08-31'; $('f-etime').value='18:00';
+    state.model=state.color=state.plan=null; state.inst='24'; state.disc='DEVICE'; state.use='Y';
+    hint('r-model','유효 코드: PH2508 / PH2401');
+    hint('r-color','모델 검증 후 사용. 유효 코드: CL07 / CL02');
+    hint('r-plan','유효 코드: 5GP100 / 5GS200');
+  }
+  renderPills();
+  showForm();
+}
+
+$('btn-new').onclick=function(){ openForm(null); };
+$('btn-back').onclick=function(){ showList(); };
+$('q-search').onclick=function(){ renderList(); };
+$('q-reset').onclick=function(){ $('q-code').value=''; $('q-channel').value=''; $('q-use').value=''; $('q-model').value=''; renderList(); };
+$('btn-excel').onclick=function(){ alert('검색 결과를 엑셀로 다운로드합니다. (CMS 표준 기능 · 제공 여부 협의)'); };
+
 /* ---------- CMS: 저장 ---------- */
 $('btn-save').onclick=function(){
   var ch=$('f-channel').value;
@@ -655,33 +810,25 @@ $('btn-save').onclick=function(){
   if(!state.model){alert('휴대폰 모델 코드를 확인해 주세요.');return;}
   if(!state.color){alert('휴대폰 색상 코드를 확인해 주세요.');return;}
   if(!state.plan){alert('요금제 코드를 확인해 주세요.');return;}
-  var no=code8();
-  policies.unshift({no:no,ch:ch,sd:sd,ed:ed,model:state.model,color:state.color,plan:state.plan,inst:state.inst,disc:state.disc,use:state.use});
-  renderList();
-  alert('정책이 등록되었습니다.\n\n프로모션 코드: '+no+'\n\n제휴 링크\nhttps://www.uplusumobile.com/onsale/partnerPromo?promoNo='+no);
-};
-$('btn-reset').onclick=function(){
-  $('f-channel').value='';$('f-model').value='';$('f-color').value='';$('f-plan').value='';
-  state.model=state.color=state.plan=null;state.inst='24';state.disc='DEVICE';state.use='Y';
-  ['r-model','r-color','r-plan'].forEach(function(id){$(id).className='text-xs mt-1 text-slate-400';});
-  $('r-model').textContent='유효 코드: PH2508 / PH2401';
-  $('r-color').textContent='모델 검증 후 사용. 유효 코드: CL07 / CL02';
-  $('r-plan').textContent='유효 코드: 5GP100 / 5GS200';
-  renderPills();
+  if(editing){
+    var p=policies.filter(function(x){return x.no===editing;})[0];
+    p.ch=ch;p.sd=sd;p.ed=ed;p.model=state.model;p.color=state.color;p.plan=state.plan;p.inst=state.inst;p.disc=state.disc;p.use=state.use;
+    alert('정책이 수정되었습니다.\n\n프로모션 코드: '+p.no);
+  }else{
+    var no=code8();
+    policies.unshift({no:no,ch:ch,sd:sd,ed:ed,model:state.model,color:state.color,plan:state.plan,inst:state.inst,disc:state.disc,use:state.use});
+    alert('정책이 등록되었습니다.\n\n프로모션 코드: '+no+'\n\n제휴 링크\n'+linkOf(no));
+  }
+  showList();
 };
 
-function renderList(){
-  if(!policies.length){$('policy-list').innerHTML='<p class="text-slate-400">등록된 정책이 없습니다</p>';return;}
-  $('policy-list').innerHTML=policies.map(function(p){
-    var st=p.use==='N'?'<span class="px-2 py-0.5 rounded bg-slate-200 text-slate-600">미사용</span>':'<span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700">사용</span>';
-    return '<div class="border border-slate-200 rounded-lg p-3">'+
-      '<div class="flex justify-between items-center mb-1"><span class="mono font-bold text-brand-500">'+p.no+'</span>'+st+'</div>'+
-      '<p class="text-slate-500">'+MASTER.models[p.model]+' · '+MASTER.colors[p.model][p.color]+'</p>'+
-      '<p class="text-slate-500">'+MASTER.plans[p.plan].name+' · '+(p.inst==='0'?'일시불':p.inst+'개월')+'</p>'+
-      '<p class="text-slate-400 mt-1">'+p.sd+' ~ '+p.ed+'</p></div>';
-  }).join('');
-}
-renderList();
+/* ---------- 시드 데이터 ---------- */
+policies=[
+  {no:'A1B2C3D4',ch:'MOYO',sd:'2026-08-01 09:00',ed:'2026-08-31 18:00',model:'PH2508',color:'CL07',plan:'5GP100',inst:'24',disc:'DEVICE',use:'Y'},
+  {no:'K9M2P7QX',ch:'MOYO',sd:'2026-09-01 00:00',ed:'2026-09-30 23:50',model:'PH2508',color:'CL02',plan:'5GS200',inst:'0',disc:'TELECOM',use:'Y'},
+  {no:'T4R8W1ZC',ch:'MOYO',sd:'2026-07-01 09:00',ed:'2026-07-27 18:00',model:'PH2401',color:'CL07',plan:'5GP100',inst:'36',disc:'DEVICE',use:'N'}
+];
+showList();
 
 /* ---------- Front 시뮬레이터 ---------- */
 var CASES={
