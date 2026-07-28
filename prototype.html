@@ -531,6 +531,15 @@ h1,h2,h3,p{margin:0}
       </div>
 
       <div id="result" class="hidden mt-4 rounded-xl p-4 text-sm"></div>
+
+      <div class="bg-white rounded-xl border border-slate-200 p-4 mt-4">
+        <h3 class="text-sm font-bold mb-1">CMS 연결</h3>
+        <p class="text-xs text-slate-500 mb-3">시뮬레이션에 사용된 정책은 <span class="mono font-bold text-brand-500">A1B2C3D4</span> 입니다.</p>
+        <div class="space-y-2">
+          <button id="go-cms-list" class="w-full px-4 py-2.5 text-sm font-bold border border-slate-300 rounded-lg bg-white hover:bg-slate-50 text-left">CMS 정책 목록 열기</button>
+          <button id="go-cms-edit" class="w-full px-4 py-2.5 text-sm font-bold border border-slate-300 rounded-lg bg-white hover:bg-slate-50 text-left">이 정책 CMS에서 열기 (수정)</button>
+        </div>
+      </div>
     </div>
 
     <div>
@@ -916,6 +925,13 @@ $('btn-cta').onclick=function(){
   $('url-bar').textContent='/onsale/joinHowtoOpen';
   showScreen('screen-join');
   showResult('<b>가입신청서로 이동했습니다.</b><br><span class="text-xs">서버 세션(partnerPromoContext)에 검증 값을 적재한 뒤 GET 이동했습니다. URL에 promoNo를 붙이지 않습니다.</span>','ok');
+};
+
+$('go-cms-list').onclick=function(){ setTab('cms'); showList(); window.scrollTo({top:0,behavior:'smooth'}); };
+$('go-cms-edit').onclick=function(){
+  var exists=policies.filter(function(x){return x.no==='A1B2C3D4';}).length>0;
+  if(!exists){ alert('해당 정책이 목록에 없습니다. 목록 화면으로 이동합니다.'); setTab('cms'); showList(); return; }
+  setTab('cms'); openForm('A1B2C3D4'); window.scrollTo({top:0,behavior:'smooth'});
 };
 
 setTab('cms');
